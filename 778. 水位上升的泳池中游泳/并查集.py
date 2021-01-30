@@ -31,25 +31,23 @@ class UnionFind:
 
 
 class Solution:
-    def minimumEffortPath(self, heights: List[List[int]]) -> int:
-        m, n = len(heights), len(heights[0])
+    def swimInWater(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
         edges = []  # dis, from, to
-
         for i in range(m):
             for j in range(n):
                 index = i * n + j
-                if i > 0:
-                    edges.append((abs(heights[i][j] - heights[i - 1][j]), index - n, index))
                 if j > 0:
-                    edges.append((abs(heights[i][j] - heights[i][j - 1]), index - 1, index))
+                    edges.append((max(grid[i][j], grid[i][j - 1]), index, index - 1))
+                if i > 0:
+                    edges.append((max(grid[i][j], grid[i - 1][j]), index, index - n))
         edges.sort()
 
         uf = UnionFind(m * n)
         ans = 0
-        for dis, f, t in edges:
+        for d, f, t in edges:
             uf.unite(f, t)
             if uf.connected(0, uf.n - 1):
-                ans = dis
+                ans = d
                 break
-
         return ans
