@@ -1,4 +1,4 @@
-from bisect import bisect_left
+from bisect import insort, bisect_left
 from typing import List
 
 
@@ -19,8 +19,7 @@ class Solution:
         l = len(nums)
         for i in range(0, l - k):
             right = nums[i + k]
-            idx = bisect_left(win, right)
-            win.insert(idx, right)
+            insort(win, right)
 
             left = nums[i]
             idx = bisect_left(win, left)
