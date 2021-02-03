@@ -12,10 +12,9 @@ class Solution:
             def median(x):
                 return x[mid]
 
-        res = []
         win = nums[:k]
         win.sort()
-        res.append(median(win))
+        res = [median(win)]
 
         l = len(nums)
         for i in range(0, l - k):
