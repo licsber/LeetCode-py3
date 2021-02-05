@@ -4,8 +4,8 @@ class Solution:
         left, right = 0, 0
         now = 0
 
-        l = len(s)
-        while right < l:
+        L = len(s)
+        while right < L:
             now += cost[right]
             if now > maxCost:
                 now -= cost[left]
